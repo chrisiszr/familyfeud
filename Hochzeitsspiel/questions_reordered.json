@@ -1,0 +1,277 @@
+[
+  {
+    "text": "Nenne etwas, das man morgens als Erstes macht",
+    "answers": [
+      {
+        "text": "Zähne putzen",
+        "points": 40
+      },
+      {
+        "text": "Aufstehen",
+        "points": 25
+      },
+      {
+        "text": "Kaffee trinken",
+        "points": 20
+      },
+      {
+        "text": "Duschen",
+        "points": 10
+      },
+      {
+        "text": "Frühstücken",
+        "points": 5
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man macht, wenn man Langeweile im Homeoffice hat",
+    "answers": [
+      {
+        "text": "Haushalt",
+        "points": 30
+      },
+      {
+        "text": "Schlafen",
+        "points": 20
+      },
+      {
+        "text": "Social Media",
+        "points": 19
+      },
+      {
+        "text": "Raus gehen",
+        "points": 15
+      },
+      {
+        "text": "Fernsehen",
+        "points": 10
+      },
+      {
+        "text": "Urlaub planen",
+        "points": 6
+      }
+    ]
+  },
+  {
+    "text": "Nenne den Teil der Hochzeit, auf den sich der Bräutigam am meisten freut",
+    "answers": [
+      {
+        "text": "Hochzeitsnacht",
+        "points": 35
+      },
+      {
+        "text": "Party",
+        "points": 20
+      },
+      {
+        "text": "Hochzeit ist geschafft",
+        "points": 18
+      },
+      {
+        "text": "Hochzeitskuss",
+        "points": 12
+      },
+      {
+        "text": "Essen und Trinken",
+        "points": 10
+      },
+      {
+        "text": "Ausschlafen",
+        "points": 5
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, wovon die Braut oft mehr hat als der Bräutigam",
+    "answers": [
+      {
+        "text": "Handtaschen",
+        "points": 42
+      },
+      {
+        "text": "Geduld",
+        "points": 21
+      },
+      {
+        "text": "Grips",
+        "points": 16
+      },
+      {
+        "text": "Klamotten",
+        "points": 13
+      },
+      {
+        "text": "Prosecco",
+        "points": 5
+      },
+      {
+        "text": "Freundinnen",
+        "points": 3
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man (im Zusammenleben) öfter macht als einem lieb ist",
+    "answers": [
+      {
+        "text": "Kompromisse",
+        "points": 38
+      },
+      {
+        "text": "Haushalt",
+        "points": 32
+      },
+      {
+        "text": "Pupsen",
+        "points": 20
+      },
+      {
+        "text": "Geld ausgeben",
+        "points": 10
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, wofür ein Ehepartner heimlich Geld ausgibt",
+    "answers": [
+      {
+        "text": "Deko",
+        "points": 40
+      },
+      {
+        "text": "Alkohol",
+        "points": 24
+      },
+      {
+        "text": "Hobbies",
+        "points": 21
+      },
+      {
+        "text": "Kleidung",
+        "points": 15
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man sagt/macht, um einen Streit zu beenden",
+    "answers": [
+      {
+        "text": "Recht geben",
+        "points": 27
+      },
+      {
+        "text": "Liebesakt",
+        "points": 23
+      },
+      {
+        "text": "Verbale Entschuldigung",
+        "points": 17
+      },
+      {
+        "text": "Umarmung / Kuss",
+        "points": 13
+      },
+      {
+        "text": "Einen Spaß machen",
+        "points": 11
+      },
+      {
+        "text": "Essen",
+        "points": 9
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man in der Ehe/Partnerschaft öfter verliert",
+    "answers": [
+      {
+        "text": "Geduld",
+        "points": 58
+      },
+      {
+        "text": "Zeit",
+        "points": 20
+      },
+      {
+        "text": "Scham/Zurückhaltung",
+        "points": 12
+      },
+      {
+        "text": "Figur",
+        "points": 10
+      }
+    ]
+  },
+  {
+    "text": "Nenne eine Sache, die der Ehepartner nur in die Hand nimmt, wenn er muss",
+    "answers": [
+      {
+        "text": "Putzlappen",
+        "points": 60
+      },
+      {
+        "text": "Klobürste",
+        "points": 20
+      },
+      {
+        "text": "Wäsche",
+        "points": 11
+      },
+      {
+        "text": "Müll",
+        "points": 9
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man betrunken scheinbar besser kann",
+    "answers": [
+      {
+        "text": "Tanzen",
+        "points": 59
+      },
+      {
+        "text": "Reden schwingen",
+        "points": 16
+      },
+      {
+        "text": "Singen",
+        "points": 10
+      },
+      {
+        "text": "Die Wahrheit sagen",
+        "points": 8
+      },
+      {
+        "text": "Flirten",
+        "points": 7
+      }
+    ]
+  },
+  {
+    "text": "Nenne eine beliebte Eissorte",
+    "answers": [
+      {
+        "text": "Vanille",
+        "points": 45
+      },
+      {
+        "text": "Schokolade",
+        "points": 30
+      },
+      {
+        "text": "Erdbeere",
+        "points": 15
+      },
+      {
+        "text": "Stracciatella",
+        "points": 7
+      },
+      {
+        "text": "Minze",
+        "points": 3
+      }
+    ]
+  }
+]
