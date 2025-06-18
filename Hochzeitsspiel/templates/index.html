@@ -21,8 +21,8 @@
       <div class="answer-grid">
         {% for i in range(answers|length) %}
           <div class="answer-row">
+            <!-- bestehende Spalten -->
             <div class="index-box">{{ i + 1 }}</div>
-
             {% if revealed_flags[i] %}
               <div class="answer-cell">
                 {{ answers[i]['text'] }} – {{ answers[i]['points'] }}
@@ -33,9 +33,15 @@
                 <button type="submit" class="answer-cell hidden"></button>
               </form>
             {% endif %}
+
+            <!-- NEUE SPALTE: Lösung + Punktzahl -->
+            <div class="solution-cell">
+              {{ answers[i]['text'] }} – {{ answers[i]['points'] }}
+            </div>
           </div>
         {% endfor %}
       </div>
+
     </div>
 
     <!-- Rechte Spalte: Neutralzähler, Fehlerzähler, Scores und Steuerung -->
@@ -119,26 +125,47 @@
       <div class="moderator-tools">
         <div class="moderator-label">Moderator Korrektur:</div>
         <div class="mod-buttons">
-          <form method="post" action="{{ url_for('adjust_score') }}" style="display:inline;">
+          <!-- Team A +10 -->
+          <form method="post" action="{{ url_for('adjust_score') }}">
             <input type="hidden" name="team" value="A">
             <input type="hidden" name="delta" value="10">
             <button type="submit" class="mod-btn">A +10</button>
           </form>
-          <form method="post" action="{{ url_for('adjust_score') }}" style="display:inline;">
+          <!-- Team A -10 -->
+          <form method="post" action="{{ url_for('adjust_score') }}">
+            <input type="hidden" name="team" value="A">
+            <input type="hidden" name="delta" value="-10">
+            <button type="submit" class="mod-btn">A −10</button>
+          </form>
+          <!-- Team A Reset -->
+          <form method="post" action="{{ url_for('reset_score') }}">
+            <input type="hidden" name="team" value="A">
+            <button type="submit" class="mod-btn">A Reset</button>
+          </form>
+
+          <!-- Spacer oder Zeilenumbruch, falls gewünscht -->
+          <div class="mod-spacer"></div>
+
+          <!-- Team B +10 -->
+          <form method="post" action="{{ url_for('adjust_score') }}">
             <input type="hidden" name="team" value="B">
             <input type="hidden" name="delta" value="10">
             <button type="submit" class="mod-btn">B +10</button>
           </form>
-          <form method="post" action="{{ url_for('reset_score') }}" style="display:inline;">
-            <input type="hidden" name="team" value="A">
-            <button type="submit" class="mod-btn">A Reset</button>
+          <!-- Team B -10 -->
+          <form method="post" action="{{ url_for('adjust_score') }}">
+            <input type="hidden" name="team" value="B">
+            <input type="hidden" name="delta" value="-10">
+            <button type="submit" class="mod-btn">B −10</button>
           </form>
-          <form method="post" action="{{ url_for('reset_score') }}" style="display:inline;">
+          <!-- Team B Reset -->
+          <form method="post" action="{{ url_for('reset_score') }}">
             <input type="hidden" name="team" value="B">
             <button type="submit" class="mod-btn">B Reset</button>
           </form>
         </div>
       </div>
+
     </div>
   </div>
 
