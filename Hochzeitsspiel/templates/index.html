@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Family Feud Moderator-Interface</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- TITEL ÜBER ALLEM -->
+  <header class="main-title">
+    <h1>Family Feud – Moderator‐Interface</h1>
+  </header>
+
+  <div class="container">
+    <!-- Linke Spalte: Frage + Antworten -->
+    <div class="left-panel">
+      <div class="question">
+        {{ question_text }}
+      </div>
+
+      <div class="answer-grid">
+        {% for i in range(answers|length) %}
+          <div class="answer-row">
+            <div class="index-box">{{ i + 1 }}</div>
+
+            {% if revealed_flags[i] %}
+              <div class="answer-cell">
+                {{ answers[i]['text'] }} – {{ answers[i]['points'] }}
+              </div>
+            {% else %}
+              <form method="post" action="{{ url_for('reveal') }}" class="answer-form">
+                <input type="hidden" name="index" value="{{ i }}">
+                <button type="submit" class="answer-cell hidden"></button>
+              </form>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Rechte Spalte: Neutralzähler, Fehlerzähler, Scores und Steuerung -->
+    <div class="right-panel">
+      <!-- Neutraler Zähler -->
+      <div class="neutral-counter">
+        Rundenpunkte: {{ neutral_points }}
+      </div>
+
+      <!-- Fehlerzähler Team A -->
+      <div class="error-section">
+        <div class="error-label">Fehler A:</div>
+        <div class="error-boxes">
+          {% for i in range(3) %}
+            {% if i < error_count_a %}
+              <!-- bereits gefülltes Kästchen -->
+              <div class="error-box filled"></div>
+            {% else %}
+              <!-- leeres Kästchen: Klick löst add_error_a aus -->
+              <form method="post" action="{{ url_for('add_error_a') }}" class="error-form">
+                <button type="submit" class="error-box"></button>
+              </form>
+            {% endif %}
+          {% endfor %}
+          <!-- Reset-Button für A -->
+          <form method="post" action="{{ url_for('reset_error_a') }}" class="error-reset-form">
+            <button type="submit" class="error-reset-btn">↺</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Fehlerzähler Team B -->
+      <div class="error-section">
+        <div class="error-label">Fehler B:</div>
+        <div class="error-boxes">
+          {% for i in range(3) %}
+            {% if i < error_count_b %}
+              <div class="error-box filled"></div>
+            {% else %}
+              <form method="post" action="{{ url_for('add_error_b') }}" class="error-form">
+                <button type="submit" class="error-box"></button>
+              </form>
+            {% endif %}
+          {% endfor %}
+          <!-- Reset-Button für B -->
+          <form method="post" action="{{ url_for('reset_error_b') }}" class="error-reset-form">
+            <button type="submit" class="error-reset-btn">↺</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Score-Boxen übereinander -->
+      <div class="scores-vertical">
+        <div class="score-box-vertical">
+          <div class="score-title">Team A</div>
+          <div class="score-value">{{ score_team_a }}</div>
+        </div>
+        <div class="score-box-vertical">
+          <div class="score-title">Team B</div>
+          <div class="score-value">{{ score_team_b }}</div>
+        </div>
+      </div>
+
+      <!-- Haupt-Steuerungs-Buttons -->
+      <div class="buttons-vertical">
+        <form method="post" action="{{ url_for('assign_a') }}" style="display:block; margin-bottom:8px;">
+          <button type="submit" class="main-btn">Punkte für A</button>
+        </form>
+        <form method="post" action="{{ url_for('assign_b') }}" style="display:block; margin-bottom:8px;">
+          <button type="submit" class="main-btn">Punkte für B</button>
+        </form>
+        <form method="post" action="{{ url_for('next_question') }}" style="display:block; margin-bottom:8px;">
+          <button type="submit" class="main-btn">Nächste Frage</button>
+        </form>
+        <form method="post" action="{{ url_for('reset_all') }}" style="display:block;">
+          <button type="submit" class="main-btn reset-all">Reset All</button>
+        </form>
+      </div>
+
+      <!-- Moderatoren-Bereich (unter den Haupt-Buttons) -->
+      <div class="moderator-tools">
+        <div class="moderator-label">Moderator Korrektur:</div>
+        <div class="mod-buttons">
+          <form method="post" action="{{ url_for('adjust_score') }}" style="display:inline;">
+            <input type="hidden" name="team" value="A">
+            <input type="hidden" name="delta" value="10">
+            <button type="submit" class="mod-btn">A +10</button>
+          </form>
+          <form method="post" action="{{ url_for('adjust_score') }}" style="display:inline;">
+            <input type="hidden" name="team" value="B">
+            <input type="hidden" name="delta" value="10">
+            <button type="submit" class="mod-btn">B +10</button>
+          </form>
+          <form method="post" action="{{ url_for('reset_score') }}" style="display:inline;">
+            <input type="hidden" name="team" value="A">
+            <button type="submit" class="mod-btn">A Reset</button>
+          </form>
+          <form method="post" action="{{ url_for('reset_score') }}" style="display:inline;">
+            <input type="hidden" name="team" value="B">
+            <button type="submit" class="mod-btn">B Reset</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

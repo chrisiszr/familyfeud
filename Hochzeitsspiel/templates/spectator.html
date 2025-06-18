@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Familienduell "... wer sich ewig bindet"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/spectator.css') }}">
+
+</head>
+<body>
+  <!-- 1. Titel -->
+  <header class="spectator-header">
+    <h1>Familienduell </h1>
+    <h2>"... wer sich ewig bindet"</h2>
+  </header>
+
+  <!-- 2. Frage in Sprechblase -->
+  <div id="question-container" class="spectator-question">
+    <!-- JS befüllt hier den Fragentext -->
+  </div>
+
+  <!-- 3. Drei‐Spalten‐Layout mit Scores, Antworten + Rundenpunkte, Scores -->
+  <div class="spectator-main-row">
+    <!-- 3.1 Score Team A + Fehler unten -->
+    <div class="team-column">
+      <div class="spectator-score-box team-a">
+        <div class="score-label">Team Braut</div>
+        <div class="score-value" id="scoreA">0</div>
+        <div class="spectator-error-boxes" id="errorsA"></div>
+      </div>
+      <!-- Bild unterhalb der Score-Box (Datei z.B. static/images/teamA.png) -->
+      <img src="{{ url_for('static', filename='images/mara.png') }}"
+           alt="Team A Logo"
+           class="team-image">
+    </div>
+
+    <!-- 3.2 Mittlere Spalte: Antworten + Rundenpunkte -->
+    <div class="spectator-center-column">
+      <div id="answers-container" class="spectator-answers">
+        <!-- JS legt hier jede Antwortzeile an -->
+      </div>
+      <div class="spectator-neutral">
+        Rundenpunkte: <span id="neutral">0</span>
+      </div>
+    </div>
+
+    <!-- 3.3 Team B-Spalte: Score-Box + Bild -->
+    <div class="team-column">
+      <div class="spectator-score-box team-b">
+        <div class="score-label">Team Al Capone</div>
+        <div class="score-value" id="scoreB">0</div>
+        <div class="spectator-error-boxes" id="errorsB"></div>
+      </div>
+      <!-- Bild unterhalb der Score-Box (Datei z.B. static/images/teamB.png) -->
+      <img src="{{ url_for('static', filename='images/simon.png') }}"
+           alt="Team B Logo"
+           class="team-image">
+    </div>
+  </div>
+
+  <!-- 4. JS‐Polling (am Ende der Seite) -->
+  <script>
+    // Speichert beim letzten Polling, welche Antwort-Indizes schon aufgedeckt waren
+    let previouslyRevealed = [];
+
+    // Speichert vorherige Fehler-Anzahl für Team A und Team B
+    let previouslyErrors = { a: 0, b: 0 };
+
+    async function refreshSpectator() {
+      try {
+        const resp = await fetch('/spectator_state');
+        const data = await resp.json();
+
+        // --- 1. Frage aktualisieren ---
+        document.getElementById('question-container').textContent = data.question_text;
+
+        // --- 2. Antworten‐Container neu befüllen ---
+        const answersDiv = document.getElementById('answers-container');
+        answersDiv.innerHTML = '';
+
+        data.answers.forEach((ans, idx) => {
+          const row = document.createElement('div');
+          row.classList.add('spectator-answer-row');
+
+          // Index
+          const idxSpan = document.createElement('span');
+          idxSpan.classList.add('spectator-index');
+          idxSpan.textContent = (idx + 1);
+          row.appendChild(idxSpan);
+
+          if (ans.revealed) {
+            // aufgedeckte Antwort: Text + Punkte
+            const textSpan = document.createElement('span');
+            textSpan.classList.add('spectator-text');
+            textSpan.textContent = ans.text;
+            row.appendChild(textSpan);
+
+            const ptsSpan = document.createElement('span');
+            ptsSpan.classList.add('spectator-points');
+            ptsSpan.textContent = ans.points;
+            row.appendChild(ptsSpan);
+
+            // Wenn diese Antwort gerade jetzt neu revealed wurde: Body‐Flash Grün
+            if (!previouslyRevealed.includes(idx)) {
+              document.body.classList.add('flash-body-green');
+              // Klasse nach 800ms entfernen
+              setTimeout(() => {
+                document.body.classList.remove('flash-body-green');
+              }, 800);
+            }
+          } else {
+            // verdeckt: Platzhalter
+            const placeholder = document.createElement('span');
+            placeholder.classList.add('spectator-placeholder');
+            placeholder.textContent = '––';
+            row.appendChild(placeholder);
+
+            const emptyPts = document.createElement('span');
+            emptyPts.classList.add('spectator-points');
+            emptyPts.textContent = ' ';
+            row.appendChild(emptyPts);
+          }
+
+          answersDiv.appendChild(row);
+        });
+
+        // Aktuelle revealed-Indizes speichern
+        previouslyRevealed = data.answers
+          .map((ans, idx) => (ans.revealed ? idx : -1))
+          .filter(idx => idx >= 0);
+
+        // --- 3. Scores aktualisieren ---
+        document.getElementById('scoreA').textContent = data.score_a;
+        document.getElementById('scoreB').textContent = data.score_b;
+        document.getElementById('neutral').textContent = data.neutral_points;
+
+        // --- 4. Fehler‐Kästchen Team A rendern + Body‐Flash Rot bei Zunahme ---
+        const errorsA = document.getElementById('errorsA');
+        errorsA.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+          const box = document.createElement('div');
+          box.classList.add('spectator-error-box');
+          if (i < data.error_count_a) {
+            box.classList.add('filled');
+          }
+          errorsA.appendChild(box);
+        }
+        if (data.error_count_a > previouslyErrors.a) {
+          document.body.classList.add('flash-body-red');
+          setTimeout(() => {
+            document.body.classList.remove('flash-body-red');
+          }, 800);
+        }
+        previouslyErrors.a = data.error_count_a;
+
+        // --- 5. Fehler‐Kästchen Team B rendern + Body‐Flash Rot bei Zunahme ---
+        const errorsB = document.getElementById('errorsB');
+        errorsB.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+          const box = document.createElement('div');
+          box.classList.add('spectator-error-box');
+          if (i < data.error_count_b) {
+            box.classList.add('filled');
+          }
+          errorsB.appendChild(box);
+        }
+        if (data.error_count_b > previouslyErrors.b) {
+          document.body.classList.add('flash-body-red');
+          setTimeout(() => {
+            document.body.classList.remove('flash-body-red');
+          }, 800);
+        }
+        previouslyErrors.b = data.error_count_b;
+
+      } catch (err) {
+        console.error('Fehler beim Aktualisieren der Zuschaueransicht:', err);
+      }
+    }
+
+    // Erstaufruf & periodisches Polling
+    refreshSpectator();
+    setInterval(refreshSpectator, 3000);
+  </script>
+</body>
+</html>

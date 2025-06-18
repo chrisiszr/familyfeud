@@ -1,0 +1,32 @@
+[
+  {
+    "text": "Nenne etwas, das man morgens als Erstes macht",
+    "answers": [
+      { "text": "Zähne putzen", "points": 40 },
+      { "text": "Aufstehen", "points": 25 },
+      { "text": "Kaffee trinken", "points": 20 },
+      { "text": "Duschen", "points": 10 },
+      { "text": "Frühstücken", "points": 5 }
+    ]
+  },
+  {
+    "text": "Nenne einen beliebten Eissorte",
+    "answers": [
+      { "text": "Vanille", "points": 45 },
+      { "text": "Schokolade", "points": 30 },
+      { "text": "Erdbeere", "points": 15 },
+      { "text": "Stracciatella", "points": 7 },
+      { "text": "Minze", "points": 3 }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man in der Schule oft vergisst",
+    "answers": [
+      { "text": "Hausaufgaben", "points": 50 },
+      { "text": "Stifte", "points": 20 },
+      { "text": "Pausebrot", "points": 15 },
+      { "text": "Sportzeug", "points": 10 },
+      { "text": "Hausaufgabenheft", "points": 5 }
+    ]
+  }
+]

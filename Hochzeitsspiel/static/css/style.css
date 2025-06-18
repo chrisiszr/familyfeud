@@ -1,0 +1,322 @@
+/* Gesamt-Layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Haupt-Titel oben */
+.main-title {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.main-title h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* Container, um linke und rechte Spalte horizontal anzuordnen */
+.container {
+  display: flex;
+  height: calc(100vh - 66px); /* Gesamt-Höhe minus Titelhöhe */
+}
+
+/* Linke Spalte: 65 % Breite */
+.left-panel {
+  flex: 0 0 65%;
+  padding: 20px;
+  overflow-y: auto; /* Scrollbar, falls Antworten länger als Fensterhöhe */
+  box-sizing: border-box;
+}
+
+/* Rechte Spalte: 35 % Breite */
+.right-panel {
+  flex: 0 0 35%;
+  padding: 20px;
+  border-left: 2px solid #ddd;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* 1. Fragetext (linke Spalte) */
+.question {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* 2. Antwort-Raster (linke Spalte) */
+.answer-grid {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+}
+
+/* Jede Antwortzeile als flex-container */
+.answer-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Index-Box */
+.index-box {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  color: #007bff;
+  flex-shrink: 0;
+}
+
+/* Wenn Antwort schon offen ist */
+.answer-cell {
+  border: 2px solid #ccc;
+  flex: 1;             /* Nimmt den restlichen Platz ein */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 15px;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+/* Verdeckte Antwort-Zelle als Button (nimmt ebenfalls vollen Restplatz ein) */
+.answer-form {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.answer-cell.hidden {
+  width: 100%;
+  height: 60px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+.answer-cell.hidden:hover {
+  background-color: #e0e0e0;
+}
+
+/* 3. Neutraler Zähler (rechte Spalte) */
+.neutral-counter {
+  text-align: center;
+  font-size: 2.5rem;          /* Deutlich größere Schrift */
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #ffca28;  /* Helles, auffälliges Gelb */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 4. Score-Boxen übereinander (rechte Spalte) */
+.scores-vertical {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  margin-bottom: 20px;
+}
+
+.score-box-vertical {
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 15px;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.score-title {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.score-value {
+  font-size: 2.5rem;      /* Größere, auffälligere Schrift für Score */
+  font-weight: bold;
+  color: #222;
+}
+
+/* 5. Haupt-Steuerungs-Buttons (rechte Spalte) */
+.buttons-vertical {
+  margin-top: auto; /* Drückt die Buttons nach unten, füllt Resthöhe */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px; /* Abstand zu Moderator-Tools */
+}
+
+.main-btn {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-btn:hover {
+  background-color: #0056b3;
+}
+
+.reset-all {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.reset-all:hover {
+  background-color: #c9302c;
+}
+
+/* 6. Moderatoren-Bereich (unter den Haupt-Buttons) */
+.moderator-tools {
+  margin-top: 0; /* steht direkt unter buttons-vertical */
+}
+
+.moderator-label {
+  text-align: left;
+  font-size: 0.8rem;  /* etwas kleinere Schrift */
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.mod-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+/* Dezente, unauffällige Mod-Buttons */
+.mod-btn {
+  padding: 2px 4px;      /* sehr klein */
+  font-size: 0.7rem;     /* kleine Schrift */
+  border: 1px solid #aaa;/* helleres Grau */
+  background-color: #f5f5f5; /* leichtes Grau */
+  color: #333;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.mod-btn:hover {
+  background-color: #ddd;
+}
+
+/* Responsive Verhalten für schmalere Bildschirme */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .left-panel,
+  .right-panel {
+    flex: none;
+    width: 100%;
+    padding: 10px;
+  }
+  .main-title h1 {
+    font-size: 1.5rem;
+  }
+  .answer-cell, .answer-cell.hidden {
+    height: 50px;
+  }
+  .neutral-counter {
+    font-size: 2rem;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+}
+
+/* ---------------------------------------------
+   EXISTIERENDE CSS‐DEFINITIONEN (aus vorheriger Version)
+   --------------------------------------------- */
+
+/* Neuer Abschnitt: Fehler‐Kästchen für Team A und B */
+.error-section {
+  margin-bottom: 20px;
+}
+
+.error-label {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.error-boxes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Graues Kästchen für Fehler (leer) */
+.error-box {
+  width: 30px;
+  height: 30px;
+  background-color: #e0e0e0;
+  border: 2px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  /* Entferne standardmäßiges Button‐Padding/Margin */
+  margin: 0;
+  padding: 0;
+}
+
+/* Rotes Kästchen für gesetzte Fehler */
+.error-box.filled {
+  background-color: #d32f2f;
+  border-color: #b71c1c;
+}
+
+/* Reset‐Symbol neben den Kästchen (z. B. ↺) */
+.error-reset-form {
+  display: inline-block;
+  margin-left: 12px;
+}
+
+.error-reset-btn {
+  width: 30px;
+  height: 30px;
+  background-color: #ffe0e0;
+  border: 2px solid #f44336;
+  color: #f44336;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-reset-btn:hover {
+  background-color: #ffcdd2;
+}
+
+/* ---------------------------------------------
+   REST der CSS‐Datei:
+   (Neutral Counter, Score‐Boxen, Buttons, etc.)
+   siehe vorangegangene Version
+   --------------------------------------------- */

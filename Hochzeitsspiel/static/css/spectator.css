@@ -1,0 +1,552 @@
+/* ---------------------------------------------
+   spectator.css – Optimiertes Layout für Beamer
+   --------------------------------------------- */
+
+/* Basis-Layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #222;
+  /* Schatten abschalten, keine unnötigen Ränder */
+}
+
+.spectator-header {
+  background-color: transparent;  /* statt #007bff */
+  color: #007bff;                 /* Schriftfarbe beibehalten, z.B. Blau */
+  text-align: center;
+  padding: 25px 0;
+  box-shadow: none;               /* Entferne Schatten, da Hintergrund nun durchsichtig */
+}
+.spectator-header h1 {
+  font-family: 'Bungee Shade', cursive;
+  /* Optional: etwas mehr Platz zwischen den Buchstaben */
+  letter-spacing: 1px;
+  font-size: 4rem;
+  /* Optional: Farbe, Schatten etc. unverändert lassen oder anpassen */
+}
+
+.spectator-header h2 {
+  font-family: 'Pacifico';
+  /* Optional: etwas mehr Platz zwischen den Buchstaben */
+  letter-spacing: 1px;
+
+  /* Optional: Farbe, Schatten etc. unverändert lassen oder anpassen */
+}
+
+
+
+/* 2. Fragebereich als Sprechblase – dominanter, mindestens 25% der Höhe */
+.spectator-question {
+  position: relative;
+  background-color: #ffffff;         /* weißer Hintergrund */
+  border: 3px solid #007bff;         /* kräftiger blauer Rahmen */
+  border-radius: 16px;
+  padding: 30px 35px;                /* großzügiges Padding */
+  max-width: 90%;
+  margin: 20px auto;                 /* zentriert mit oben/unten Abstand */
+  font-size: 3.5rem;                  /* sehr große Schrift */
+  color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Sprechblasen-Spitze */
+.spectator-question::after {
+  content: "";
+  position: absolute;
+  bottom: -28px;                    /* etwas tiefer, damit Spitze sichtbar bleibt */
+  left: 60px;                       /* seitlicher Versatz, kann je nach Textlänge angepasst werden */
+  border-width: 16px 16px 0 16px;   /* deutlich größere Spitze */
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.spectator-question::before {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 58px;
+  border-width: 18px 18px 0 18px;
+  border-style: solid;
+  border-color: #007bff transparent transparent transparent;
+}
+
+/* 3. Hauptbereich: Drei-Spalten-Layout, nutzt max. Breite */
+.spectator-main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 40px;  /* mehr seitlicher Abstand für bessere Proportion */
+  gap: 20px;           /* großzügiger Abstand zwischen Spalten */
+  box-sizing: border-box;
+}
+
+/* 3.1 Score-Boxen (links und rechts) – deutlich vergrößert */
+.spectator-score-box {
+  flex: 0 0 20%;        /* 20% der Gesamtbreite, mindestens */
+  min-width: 220px;     /* auf Projektor gut lesbar */
+  background-color: #e3f2fd;
+  border: 3px solid #2196f3;
+  border-radius: 12px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spectator-score-box.team-a {
+  background-color: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.spectator-score-box.team-b {
+  background-color: #f3e5f5;
+  border-color: #9c27b0;
+}
+
+.spectator-score-box .score-label {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.spectator-score-box .score-value {
+  font-size: 4rem;      /* sehr große Ziffern */
+  font-weight: 900;
+  color: #222;
+}
+
+/* 3.1.1 Fehler-Kästchen unterhalb der Score-Boxen – größer gemacht */
+.spectator-error-boxes {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;            /* größerer Abstand zwischen Kästchen */
+}
+
+.spectator-error-box {
+  width: 36px;          /* deutlich größere Kästchen */
+  height: 36px;
+  background-color: #e0e0e0;
+  border: 3px solid #bbb;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.spectator-error-box.filled {
+  background-color: #d32f2f;
+  border-color: #b71c1c;
+}
+
+/* 3.2 Mittlere Spalte: Antworten + Rundenpunkte */
+.spectator-center-column {
+  flex: 1;               /* füllt restliche Breite */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* Antworten-Container – nutzt 100% der Mitte, scrollt falls nötig */
+.spectator-answers {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;             /* viel Platz zwischen den Antwortzeilen */
+  max-height: 60vh;      /* 60% der Fensterhöhe, damit Footer sichtbar bleibt */
+  overflow-y: auto;
+}
+
+/* Einzelne Antwortzeile – groß, mit viel Padding */
+.spectator-answer-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #f5f5f5;
+  border: 3px solid #ccc;
+  border-radius: 8px;
+  padding: 20px 25px;
+  box-sizing: border-box;
+}
+
+/* Index-Box in Antwortzeile */
+.spectator-index {
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+  color: #007bff;
+  flex-shrink: 0;
+}
+
+/* Wenn aufgedeckt: Antworttext */
+.spectator-text {
+  flex: 1;
+  font-size: 2.2rem;
+  margin-left: 24px;
+  color: #333;
+}
+
+/* Wenn aufgedeckt: Punkte */
+.spectator-points {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-left: 24px;
+  color: #d32f2f;
+}
+
+/* Wenn noch verdeckt: Platzhalter („––“) – gleicher Abstand */
+.spectator-placeholder {
+  flex: 1;
+  font-size: 2.2rem;
+  color: #aaa;
+  text-align: left;
+  margin-left: 24px;
+}
+
+/* 3.3 Rundenpunkte-Box (unterhalb der Antworten) – breit und auffällig */
+.spectator-neutral {
+  width: 100%;
+  background-color: #ffecb3;
+  border: 3px solid #ffc107;
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spectator-neutral span {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* 4. Responsive Anpassungen (Tablet, kleine Projektoren) */
+@media (max-width: 1440px) {
+  .spectator-header h1 {
+    font-size: 2.8rem;
+  }
+  .spectator-question {
+    font-size: 3rem;
+    padding: 28px 32px;
+  }
+  .spectator-question::after {
+    bottom: -24px;
+    left: 50px;
+    border-width: 14px 14px 0 14px;
+  }
+  .spectator-question::before {
+    bottom: -26px;
+    left: 48px;
+    border-width: 16px 16px 0 16px;
+  }
+
+  .spectator-score-box {
+    min-width: 200px;
+    padding: 18px;
+  }
+  .spectator-score-box .score-label {
+    font-size: 1.4rem;
+  }
+  .spectator-score-box .score-value {
+    font-size: 3.6rem;
+  }
+  .spectator-error-boxes {
+    margin-top: 16px;
+    gap: 10px;
+  }
+  .spectator-error-box {
+    width: 32px;
+    height: 32px;
+  }
+
+  .spectator-answer-row {
+    padding: 18px 20px;
+  }
+  .spectator-index {
+    font-size: 2.2rem;
+    width: 55px;
+  }
+  .spectator-text,
+  .spectator-points,
+  .spectator-placeholder {
+    font-size: 2rem;
+    margin-left: 20px;
+  }
+
+  .spectator-neutral span {
+    font-size: 2.6rem;
+  }
+  .spectator-neutral {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .spectator-main-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .spectator-score-box {
+    width: 85%;
+    min-width: unset;
+    margin-bottom: 24px;
+  }
+  .spectator-center-column {
+    width: 90%;
+  }
+  .spectator-question {
+    font-size: 2.6rem;
+    padding: 24px 28px;
+  }
+  .spectator-question::after {
+    bottom: -22px;
+    left: 45px;
+    border-width: 12px 12px 0 12px;
+  }
+  .spectator-question::before {
+    bottom: -24px;
+    left: 43px;
+    border-width: 14px 14px 0 14px;
+  }
+
+  .spectator-answer-row {
+    padding: 16px 18px;
+  }
+  .spectator-index {
+    font-size: 2rem;
+    width: 50px;
+  }
+  .spectator-text,
+  .spectator-points,
+  .spectator-placeholder {
+    font-size: 1.8rem;
+    margin-left: 18px;
+  }
+
+  .spectator-neutral span {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .spectator-question {
+    font-size: 2.2rem;
+    padding: 20px 24px;
+  }
+  .spectator-question::after {
+    bottom: -20px;
+    left: 40px;
+    border-width: 10px 10px 0 10px;
+  }
+  .spectator-question::before {
+    bottom: -22px;
+    left: 38px;
+    border-width: 12px 12px 0 12px;
+  }
+
+  .spectator-score-box {
+    width: 90%;
+  }
+  .spectator-score-box .score-value {
+    font-size: 3.2rem;
+  }
+  .spectator-error-boxes {
+    gap: 8px;
+  }
+  .spectator-error-box {
+    width: 28px;
+    height: 28px;
+  }
+
+  .spectator-answer-row {
+    padding: 14px 16px;
+  }
+  .spectator-index {
+    font-size: 1.8rem;
+    width: 45px;
+  }
+  .spectator-text,
+  .spectator-points,
+  .spectator-placeholder {
+    font-size: 1.6rem;
+    margin-left: 16px;
+  }
+
+  .spectator-neutral span {
+    font-size: 2rem;
+  }
+  .spectator-neutral {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Auf kleineren Projektoren/Displays: alles sehr kompakt aber noch lesbar */
+  .spectator-header h1 {
+    font-size: 2rem;
+  }
+  .spectator-question {
+    font-size: 1.8rem;
+    padding: 18px 20px;
+  }
+  .spectator-question::after {
+    bottom: -18px;
+    left: 35px;
+    border-width: 8px 8px 0 8px;
+  }
+  .spectator-question::before {
+    bottom: -20px;
+    left: 33px;
+    border-width: 10px 10px 0 10px;
+  }
+
+  .spectator-score-box {
+    width: 95%;
+    padding: 14px;
+  }
+  .spectator-score-box .score-label {
+    font-size: 1.2rem;
+  }
+  .spectator-score-box .score-value {
+    font-size: 2.8rem;
+  }
+  .spectator-error-boxes {
+    margin-top: 14px;
+    gap: 6px;
+  }
+  .spectator-error-box {
+    width: 24px;
+    height: 24px;
+  }
+
+  .spectator-answer-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+  .spectator-index {
+    font-size: 1.6rem;
+    width: 40px;
+    margin-bottom: 6px;
+  }
+  .spectator-text,
+  .spectator-points,
+  .spectator-placeholder {
+    font-size: 1.4rem;
+    margin-left: 0;
+  }
+
+  .spectator-neutral {
+    width: 95%;
+    padding: 14px;
+  }
+  .spectator-neutral span {
+    font-size: 1.8rem;
+  }
+}
+
+.spectator-error-boxes {
+  /* Statt flex‐Direction: row nun column, damit die Kästchen untereinander stehen */
+  display: flex;
+  flex-direction: column;    /* untereinander */
+  align-items: center;       /* horizontal zentrieren */
+  gap: 16px;                 /* Abstand zwischen den einzelnen Kästchen */
+
+  margin-top: 24px;          /* Platz über den Kästchen (zwischen Score und erstem Kästchen) */
+}
+
+.spectator-error-box {
+  /* Kästchen deutlich größer als vorher, damit man sie auf der Leinwand gut erkennt */
+  width: 48px;
+  height: 48px;
+  background-color: #e0e0e0; /* hellgrau für "kein Fehler" */
+  border: 3px solid #bbb;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Sobald ein Fehler vorhanden ist, ist das Kästchen "filled" und wird rot gefüllt */
+.spectator-error-box.filled {
+  background-color: #d32f2f;
+  border-color: #b71c1c;
+}
+
+/* ---------------------------------------------
+   FLASH FÜR GESAMTEN BODY‐HINTERGRUND
+   --------------------------------------------- */
+
+/* Grün‐Flash: Body‐Hintergrund von hellem Grün zu transparent */
+@keyframes body-flash-green {
+  0%   { background-color: rgba(144, 238, 144, 0.8); } /* helles Grün, 80% Deckkraft */
+  50%  { background-color: rgba(144, 238, 144, 0.4); }
+  100% { background-color: transparent; }
+}
+
+/* Rot‐Flash: Body‐Hintergrund von hellem Rot zu transparent */
+@keyframes body-flash-red {
+  0%   { background-color: rgba(255, 99,  71, 0.8); } /* Tomatenrot, 80% Deckkraft */
+  50%  { background-color: rgba(255, 99,  71, 0.4); }
+  100% { background-color: transparent; }
+}
+
+/* Klasse, die den grünen Body‐Flash auslöst */
+.flash-body-green {
+  animation: body-flash-green 4s ease-out;
+}
+
+/* Klasse, die den roten Body‐Flash auslöst */
+.flash-body-red {
+  animation: body-flash-red 4s ease-out;
+}
+
+/* ---------------------------------------------
+   6. Team-Spalte inkl. Bild unter Score-Box
+   --------------------------------------------- */
+
+/* Wrapper, der Score-Box und Bild stapelt */
+.team-column {
+  flex: 0 0 20%;               /* etwa 20% Breite für jede Team-Spalte */
+  display: flex;
+  flex-direction: column;      /* Score-Box oben, Bild direkt darunter */
+  align-items: center;         /* Inhalt zentriert ausrichten */
+  box-sizing: border-box;
+}
+
+/* Bild direkt unterhalb der Score-Box */
+.team-image {
+  margin-top: 12px;            /* Abstand zwischen Score-Box und Bild */
+  max-width: 100%;             /* passt sich der Team-Spalten-Breite an */
+  height: auto;                /* Seitenverhältnis beibehalten */
+  object-fit: contain;         /* skaliert das Bild ohne Verzerrung */
+  /* Optional: feste Höhe oder Breite setzen, falls gewünscht:
+     width: 120px;
+     height: auto;
+     Dann evtl. margin-bottom: …, um Abstand nach unten zu wahren. */
+}
+
+/* Responsive Anpassungen für Tablets/kleinere Projektoren */
+@media (max-width: 1024px) {
+  .team-column {
+    flex: 0 0 25%;             /* vielleicht etwas breiter in einer schmaleren Ansicht */
+    margin-bottom: 20px;       /* Platz zwischen den Blöcken, falls untereinander */
+  }
+  .team-image {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-column {
+    flex: 0 0 90%;             /* auf mobilen Geräten fast voller Breite */
+  }
+  .team-image {
+    margin-top: 8px;
+  }
+}
