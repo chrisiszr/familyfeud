@@ -113,10 +113,17 @@
         <form method="post" action="{{ url_for('assign_b') }}" style="display:block; margin-bottom:8px;">
           <button type="submit" class="main-btn">Punkte für Al Capone</button>
         </form>
-        <form method="post" action="{{ url_for('next_question') }}" style="display:block; margin-bottom:8px;">
+        <form method="post"
+              action="{{ url_for('next_question') }}"
+              style="display:block; margin-bottom:8px;"
+              onsubmit="return confirm('Willst du wirklich zur nächsten Frage springen?');">
           <button type="submit" class="main-btn">Nächste Frage</button>
         </form>
-        <form method="post" action="{{ url_for('reset_all') }}" style="display:block;">
+
+        <form method="post"
+              action="{{ url_for('reset_all') }}"
+              style="display:block;"
+              onsubmit="return confirm('Alle Daten werden gelöscht – wirklich zurücksetzen?');">
           <button type="submit" class="main-btn reset-all">Reset All</button>
         </form>
       </div>
