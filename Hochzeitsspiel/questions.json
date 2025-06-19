@@ -1,55 +1,26 @@
 [
   {
-    "text": "Nenne etwas, das man morgens als Erstes macht",
-    "answers": [
-      {
-        "text": "Zähne putzen",
-        "points": 40
-      },
-      {
-        "text": "Aufstehen",
-        "points": 25
-      },
-      {
-        "text": "Kaffee trinken",
-        "points": 20
-      },
-      {
-        "text": "Duschen",
-        "points": 10
-      },
-      {
-        "text": "Frühstücken",
-        "points": 5
-      }
-    ]
-  },
-  {
     "text": "Nenne etwas, das man macht, wenn man Langeweile im Homeoffice hat",
     "answers": [
       {
         "text": "Haushalt",
-        "points": 30
+        "points": 32
       },
       {
         "text": "Schlafen",
-        "points": 20
+        "points": 21
       },
       {
         "text": "Social Media",
-        "points": 19
+        "points": 20
       },
       {
         "text": "Raus gehen",
-        "points": 15
+        "points": 16
       },
       {
         "text": "Fernsehen",
-        "points": 10
-      },
-      {
-        "text": "Urlaub planen",
-        "points": 6
+        "points": 11
       }
     ]
   },
@@ -58,27 +29,23 @@
     "answers": [
       {
         "text": "Hochzeitsnacht",
-        "points": 35
+        "points": 36
       },
       {
         "text": "Party",
-        "points": 20
+        "points": 21
       },
       {
         "text": "Hochzeit ist geschafft",
-        "points": 18
+        "points": 19
       },
       {
         "text": "Hochzeitskuss",
-        "points": 12
+        "points": 13
       },
       {
         "text": "Essen und Trinken",
-        "points": 10
-      },
-      {
-        "text": "Ausschlafen",
-        "points": 5
+        "points": 11
       }
     ]
   },
@@ -87,27 +54,50 @@
     "answers": [
       {
         "text": "Handtaschen",
-        "points": 42
+        "points": 43
       },
       {
         "text": "Geduld",
-        "points": 21
+        "points": 22
       },
       {
         "text": "Grips",
-        "points": 16
+        "points": 17
       },
       {
         "text": "Klamotten",
         "points": 13
       },
       {
-        "text": "Prosecco",
+        "text": "Freundinnen",
         "points": 5
+      }
+    ]
+  },
+  {
+    "text": "Nenne etwas, das man sagt/macht, um einen Streit zu beenden",
+    "answers": [
+      {
+        "text": "Geste der Liebe",
+        "points": 36
       },
       {
-        "text": "Freundinnen",
-        "points": 3
+        "text": "Recht geben",
+        "points": 27
+      },
+      
+      {
+        "text": "Verbale Entschuldigung",
+        "points": 17
+      },
+
+      {
+        "text": "Einen Spaß machen",
+        "points": 11
+      },
+      {
+        "text": "Essen",
+        "points": 9
       }
     ]
   },
@@ -119,7 +109,7 @@
         "points": 38
       },
       {
-        "text": "Haushalt",
+        "text": "Haushaltsaufgaben",
         "points": 32
       },
       {
@@ -153,35 +143,7 @@
       }
     ]
   },
-  {
-    "text": "Nenne etwas, das man sagt/macht, um einen Streit zu beenden",
-    "answers": [
-      {
-        "text": "Recht geben",
-        "points": 27
-      },
-      {
-        "text": "Liebesakt",
-        "points": 23
-      },
-      {
-        "text": "Verbale Entschuldigung",
-        "points": 17
-      },
-      {
-        "text": "Umarmung / Kuss",
-        "points": 13
-      },
-      {
-        "text": "Einen Spaß machen",
-        "points": 11
-      },
-      {
-        "text": "Essen",
-        "points": 9
-      }
-    ]
-  },
+  
   {
     "text": "Nenne etwas, das man in der Ehe/Partnerschaft öfter verliert",
     "answers": [
@@ -246,31 +208,6 @@
       {
         "text": "Flirten",
         "points": 7
-      }
-    ]
-  },
-  {
-    "text": "Nenne eine beliebte Eissorte",
-    "answers": [
-      {
-        "text": "Vanille",
-        "points": 45
-      },
-      {
-        "text": "Schokolade",
-        "points": 30
-      },
-      {
-        "text": "Erdbeere",
-        "points": 15
-      },
-      {
-        "text": "Stracciatella",
-        "points": 7
-      },
-      {
-        "text": "Minze",
-        "points": 3
       }
     ]
   }
